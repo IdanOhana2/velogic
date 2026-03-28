@@ -1,0 +1,107 @@
+"use client";
+
+import React from 'react';
+import { Clock, Ban, Smartphone, Palette, CheckCircle2 } from 'lucide-react';
+import ValueCard from '@/components/ValueCard';
+import HeroCharacter from '@/components/HeroCharacter';
+import LoadingScreen from '@/components/LoadingScreen';
+import { MadeWithDyad } from "@/components/made-with-dyad";
+
+const Index = () => {
+  return (
+    <div className="min-h-screen bg-black overflow-hidden selection:bg-primary/30 relative">
+      <LoadingScreen />
+      
+      {/* Subtle Radial Glow for Depth */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
+      </div>
+      
+      {/* Main Content Container */}
+      <main className="container mx-auto px-4 pt-12 pb-32 relative z-20">
+        
+        {/* Master Wordmark - Moved to Top */}
+        <div className="mb-12 text-center animate-in fade-in slide-in-from-top-8 duration-1000">
+          <h1 className="text-7xl md:text-9xl font-black tracking-tighter rose-gold-text drop-shadow-2xl">
+            VELOGIC
+          </h1>
+          <p className="text-primary/60 tracking-[0.5em] text-sm mt-4 font-light uppercase">
+            Business Logic & Automation
+          </p>
+        </div>
+
+        {/* Hero Section */}
+        <div className="flex flex-col items-center justify-center relative">
+          
+          {/* Floating Cards - Desktop Layout */}
+          <div className="absolute inset-0 pointer-events-none hidden lg:block">
+            {/* Top Left */}
+            <div className="absolute top-20 left-[10%]">
+              <ValueCard 
+                title="עסק שעובד 24/7"
+                subtitle="סגירת תורים אוטומטית (אפילו בלילה!)"
+                icon={Clock}
+                delay="0s"
+              />
+            </div>
+            {/* Middle Left */}
+            <div className="absolute top-1/2 left-[5%] -translate-y-1/2">
+              <ValueCard 
+                title="סוף לביטולים והברזות"
+                subtitle="חיוב מקדמה ודמי ביטול מראש"
+                icon={Ban}
+                delay="1.5s"
+              />
+            </div>
+            {/* Top Right */}
+            <div className="absolute top-20 right-[10%]">
+              <ValueCard 
+                title="חוויית לקוח מושלמת"
+                subtitle="קביעת תור ב-3 קליקים בלבד"
+                icon={Smartphone}
+                delay="0.7s"
+              />
+            </div>
+            {/* Middle Right */}
+            <div className="absolute top-1/2 right-[5%] -translate-y-1/2">
+              <ValueCard 
+                title="העסק שלך ממותג"
+                subtitle="מעוצב בצבעי המותג הייחודיים שלך"
+                icon={Palette}
+                delay="2.2s"
+              />
+            </div>
+          </div>
+
+          {/* Central Character */}
+          <HeroCharacter />
+
+          {/* Mobile Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-12 lg:hidden">
+            <ValueCard title="עסק שעובד 24/7" subtitle="סגירת תורים אוטומטית" icon={Clock} />
+            <ValueCard title="חוויית לקוח מושלמת" subtitle="קביעת תור ב-3 קליקים" icon={Smartphone} />
+          </div>
+
+          {/* Status Indicators */}
+          <div className="mt-12 flex gap-6 items-center">
+            <div className="glass-card px-4 py-2 rounded-full flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-400" />
+              <span className="text-xs font-medium text-white/80">YOMAN SAGUR</span>
+            </div>
+            <div className="glass-card px-4 py-2 rounded-full flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-400" />
+              <span className="text-xs font-medium text-white/80">BOOKINGS COMPLETE</span>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <footer className="fixed bottom-0 w-full border-t border-white/5 bg-black/20 backdrop-blur-md z-30">
+        <MadeWithDyad />
+      </footer>
+    </div>
+  );
+};
+
+export default Index;
