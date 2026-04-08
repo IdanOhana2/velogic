@@ -1,46 +1,44 @@
 "use client";
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { MessageCircle } from 'lucide-react';
 
-interface VideoShowcaseProps {
-  className?: string;
-  title: string;
-  subtitle: string;
-}
-
-const VideoShowcase = ({ className, title, subtitle }: VideoShowcaseProps) => {
+export const MadeWithDyad = () => {
   return (
-    <div className={cn("relative group", className)}>
-      {/* Glowing Background Effect */}
-      <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full opacity-50 group-hover:opacity-80 transition-opacity duration-700" />
+    <div className="p-6 text-center flex flex-col items-center gap-4">
+      <a
+        href="https://wa.me/972557125076"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold rounded-full shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:shadow-[0_0_30px_rgba(37,211,102,0.6)] transition-all duration-300 hover:scale-105 active:scale-95"
+      >
+        <MessageCircle className="w-6 h-6 animate-pulse" />
+        <span className="text-lg tracking-wide">דברו איתנו בוואטסאפ</span>
+        
+        {/* Shine effect */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-shine pointer-events-none" />
+      </a>
       
-      <div className="glass-card p-2 rounded-[2rem] border-primary/30 overflow-hidden relative z-10 shadow-2xl">
-        <div className="relative aspect-[9/16] w-full max-w-[280px] rounded-[1.5rem] overflow-hidden bg-zinc-900">
-          {/* Video Element */}
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="/src/assets/app-demo.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-          
-          {/* Text Overlay */}
-          <div className="absolute bottom-6 left-0 right-0 px-4 text-right">
-            <h4 className="text-white font-bold text-lg leading-tight">{title}</h4>
-            <p className="text-primary/80 text-xs mt-1">{subtitle}</p>
-          </div>
-        </div>
+      <div className="flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity duration-500">
+        <span className="text-[10px] text-white/50 uppercase tracking-[0.3em] mb-1">Powered by</span>
+        <a
+          href="https://www.dyad.sh/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs text-white/70 hover:text-primary transition-colors font-medium"
+        >
+          VELOGIC SYSTEMS
+        </a>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes shine {
+          100% { transform: translateX(100%); }
+        }
+        .animate-shine {
+          animation: shine 1.5s infinite;
+        }
+      `}} />
     </div>
   );
 };
-
-export default VideoShowcase;

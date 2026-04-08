@@ -1,119 +1,64 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { Star, Calendar, CheckCircle2, Smartphone, Search } from 'lucide-react';
+import React from 'react';
+import { ExternalLink, Smartphone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const LoadingScreen = () => {
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(false), 4500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!isVisible) return null;
-
+const PortfolioSection = () => {
   return (
-    <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden">
-      {/* Background Business Ecosystem */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none">
-        
-        {/* Phone App Interface - Left */}
-        <div className="absolute top-1/2 left-10 -translate-y-1/2 w-72 h-[500px] glass-card rounded-[3rem] p-6 rotate-[-6deg] border-primary/30 shadow-[0_0_50px_rgba(226,176,145,0.1)]">
-          <div className="flex justify-between items-center mb-6">
-            <div className="w-12 h-2 bg-white/20 rounded-full" />
-            <div className="w-4 h-4 rounded-full bg-primary/20" />
-          </div>
-          <h4 className="text-primary text-xs font-bold mb-4 text-right">יומן פגישות</h4>
-          <div className="grid grid-cols-7 gap-1 mb-4">
-            {[...Array(28)].map((_, i) => (
-              <div key={i} className={`aspect-square rounded-sm ${i === 14 ? 'bg-primary/40' : 'bg-white/5'}`} />
-            ))}
-          </div>
-          <div className="space-y-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="h-14 bg-white/5 rounded-2xl flex items-center px-4 justify-between border border-white/5">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/40 to-transparent" />
-                  <div className="space-y-1">
-                    <div className="w-16 h-2 bg-white/20 rounded" />
-                    <div className="w-10 h-1.5 bg-white/10 rounded" />
-                  </div>
-                </div>
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-              </div>
-            ))}
-          </div>
-        </div>
+    <div className="w-full max-w-5xl mx-auto mt-32 mb-32 px-6">
+      <div className="text-center mb-16">
+        <h3 className="text-3xl md:text-5xl font-black text-white mb-4">
+          העבודות <span className="rose-gold-text">שלנו</span>
+        </h3>
+        <p className="text-white/50 text-lg">הצצה לאפליקציות שכבר משנות את חוקי המשחק</p>
+      </div>
 
-        {/* Google Reviews - Right */}
-        <div className="absolute top-1/4 right-10 w-80 space-y-6 rotate-[4deg]">
-          <div className="glass-card p-5 rounded-3xl border-primary/20 animate-float" style={{ animationDelay: '0.5s' }}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">G</div>
-              <div>
-                <div className="text-[10px] text-white/60">Google Review</div>
-                <div className="flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3 h-3 fill-primary text-primary" />)}
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Amit Tzarfati Card */}
+        <Link to="/amit-tzarfati" className="group relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/10 rounded-[2.5rem] blur opacity-20 group-hover:opacity-60 transition duration-700"></div>
+          <div className="relative glass-card p-8 rounded-[2.5rem] border-primary/20 overflow-hidden flex flex-col h-full hover:translate-y-[-8px] transition-all duration-500">
+            
+            <div className="flex justify-between items-start mb-8">
+              <div className="w-16 h-16 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-500">
+                <span className="text-2xl font-black rose-gold-text">AT</span>
+              </div>
+              <div className="p-3 rounded-full bg-primary/10 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <ExternalLink size={20} />
               </div>
             </div>
-            <p className="text-[11px] text-white/80 text-right leading-relaxed">"האפליקציה הכי טובה לניהול העסק שלי. הכל אוטומטי ונוח!"</p>
-          </div>
 
-          <div className="glass-card p-5 rounded-3xl border-primary/20 animate-float" style={{ animationDelay: '1.2s' }}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 font-bold">G</div>
-              <div>
-                <div className="text-[10px] text-white/60">Google Review</div>
-                <div className="flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3 h-3 fill-primary text-primary" />)}
-                </div>
+            <div className="mt-auto">
+              <h4 className="text-2xl font-bold text-white mb-2">AMIT TZARFATI</h4>
+              <p className="text-white/40 text-sm leading-relaxed mb-6">
+                אפליקציית ניהול תורים ו-VIP מותאמת אישית, המעניקה חוויית משתמש יוקרתית וחלקה ללקוחות המותג.
+              </p>
+              
+              <div className="flex items-center gap-3 text-primary/60 text-xs font-bold uppercase tracking-widest">
+                <Smartphone size={14} />
+                <span>Live on App Store</span>
               </div>
             </div>
-            <p className="text-[11px] text-white/80 text-right leading-relaxed">"סוף סוף יומן שסוגר לי תורים גם כשאני ישנה. מומלץ בחום."</p>
+
+            {/* Decorative background element */}
+            <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700"></div>
+          </div>
+        </Link>
+
+        {/* Placeholder for next project */}
+        <div className="relative group opacity-50">
+          <div className="relative border-2 border-dashed border-white/10 rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center h-full min-h-[300px]">
+            <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-4">
+              <span className="text-2xl font-black text-white/20">?</span>
+            </div>
+            <h4 className="text-xl font-bold text-white/20">האפליקציה שלך כאן</h4>
+            <p className="text-white/10 text-sm mt-2">אנחנו כבר עובדים על הפרויקט הבא...</p>
           </div>
         </div>
       </div>
-
-      {/* Central Character Container */}
-      <div className="relative z-10 flex flex-col items-center">
-        <div className="relative group">
-          {/* Glowing Aura */}
-          <div className="absolute inset-0 bg-primary/30 blur-[120px] rounded-full animate-pulse scale-150" />
-          <div className="absolute inset-0 bg-primary/10 blur-[60px] rounded-full animate-ping" />
-          
-          {/* The Image - Smaller and Floating */}
-          <img 
-            src="/hero-character-no-bg.png" 
-            alt="Velogic Character" 
-            className="w-[320px] h-auto relative z-10 animate-float drop-shadow-[0_20px_50px_rgba(226,176,145,0.4)]"
-          />
-        </div>
-
-        {/* Progress Bar */}
-        <div className="mt-16 w-48 h-1 bg-white/5 rounded-full overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent animate-[shimmer_2s_infinite] w-full" />
-          <div className="h-full bg-primary animate-[load_4s_ease-in-out_forwards]" style={{ width: '0%' }} />
-        </div>
-        
-        <p className="mt-6 text-primary/80 text-sm tracking-widest font-bold animate-pulse text-center">
-          אפליקציה ממותגת אישית לעסק שלך
-        </p>
-      </div>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes load {
-          0% { width: 0%; }
-          100% { width: 100%; }
-        }
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}} />
     </div>
   );
 };
 
-export default LoadingScreen;
+export default PortfolioSection;

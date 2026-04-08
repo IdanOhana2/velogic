@@ -1,139 +1,119 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { ThumbsUp, Zap, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Star, Calendar, CheckCircle2, Smartphone, Search } from 'lucide-react';
 
-const HeroCharacter = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const screenshots = [
-    '/app-1.jpg',
-    '/app-2.jpg',
-    '/app-3.jpg',
-    '/app-4.jpg',
-    '/app-5.jpg',
-    '/app-6.png'
-  ];
+const LoadingScreen = () => {
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % screenshots.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [screenshots.length]);
+    const timer = setTimeout(() => setIsVisible(false), 4500);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const nextSlide = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentSlide((prev) => (prev + 1) % screenshots.length);
-  };
-
-  const prevSlide = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentSlide((prev) => (prev - 1 + screenshots.length) % screenshots.length);
-  };
+  if (!isVisible) return null;
 
   return (
-    <div className="relative w-full max-w-3xl aspect-square flex items-center justify-center">
-      {/* Background 'V' Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-        <span className="text-[40rem] font-bold select-none">V</span>
-      </div>
-
-      {/* Character Representation */}
-      <div className="relative z-10 flex flex-col items-center">
+    <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden">
+      {/* Background Business Ecosystem */}
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
         
-        {/* The "Holographic Booking" Head Area */}
-        <div className="w-72 h-72 relative perspective-1000 flex flex-col items-center justify-center">
-          {/* Scanning Line Effect */}
-          <div className="absolute inset-x-0 top-0 bg-gradient-to-b from-transparent via-[#e2b091]/20 to-transparent h-1/2 w-full animate-scan pointer-events-none" />
+        {/* Phone App Interface - Left */}
+        <div className="absolute top-1/2 left-10 -translate-y-1/2 w-72 h-[500px] glass-card rounded-[3rem] p-6 rotate-[-6deg] border-primary/30 shadow-[0_0_50px_rgba(226,176,145,0.1)]">
+          <div className="flex justify-between items-center mb-6">
+            <div className="w-12 h-2 bg-white/20 rounded-full" />
+            <div className="w-4 h-4 rounded-full bg-primary/20" />
+          </div>
+          <h4 className="text-primary text-xs font-bold mb-4 text-right">יומן פגישות</h4>
+          <div className="grid grid-cols-7 gap-1 mb-4">
+            {[...Array(28)].map((_, i) => (
+              <div key={i} className={`aspect-square rounded-sm ${i === 14 ? 'bg-primary/40' : 'bg-white/5'}`} />
+            ))}
+          </div>
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-14 bg-white/5 rounded-2xl flex items-center px-4 justify-between border border-white/5">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/40 to-transparent" />
+                  <div className="space-y-1">
+                    <div className="w-16 h-2 bg-white/20 rounded" />
+                    <div className="w-10 h-1.5 bg-white/10 rounded" />
+                  </div>
+                </div>
+                <CheckCircle2 className="w-4 h-4 text-green-500" />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Suit & Body */}
-        <div className="w-72 h-96 bg-gradient-to-b from-[#2d1b4d] to-[#1a2a2a] rounded-t-[5rem] mt-[-30px] relative shadow-2xl flex items-center justify-center">
-          
-          {/* 3D Floating Smartphone Container - ENLARGED */}
-          <div className="relative w-56 h-[28rem] animate-float perspective-1000 z-20">
-            
-            {/* Glowing Orbiting Trail */}
-            <div className="absolute inset-[-60px] pointer-events-none z-30">
-              <div className="absolute w-5 h-5 bg-primary rounded-full blur-md animate-orbit" />
-              <div className="absolute w-4 h-4 bg-white rounded-full blur-sm animate-orbit" style={{ animationDelay: '-2s' }} />
-              <div className="absolute w-3 h-3 bg-primary rounded-full blur-[2px] animate-orbit" style={{ animationDelay: '-4s' }} />
-            </div>
-
-            <div className="relative w-full h-full transition-transform duration-500 preserve-3d hover:rotate-y-12">
-              <div className="absolute inset-0 bg-zinc-900 rounded-[3rem] border-[8px] border-zinc-800 shadow-[0_30px_60px_rgba(0,0,0,0.9)] overflow-hidden">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-7 bg-zinc-800 rounded-b-3xl z-30" />
-                <div className="relative w-full h-full bg-white overflow-hidden">
-                  {screenshots.map((src, idx) => (
-                    <div
-                      key={idx}
-                      className={`absolute inset-0 transition-opacity duration-500 ${idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-                    >
-                      <img src={src} alt={`App screen ${idx + 1}`} className="w-full h-full object-cover" />
-                    </div>
-                  ))}
-                  <div className="absolute inset-0 z-20 flex items-center justify-between px-3 opacity-0 hover:opacity-100 transition-opacity">
-                    <button onClick={prevSlide} className="p-2 bg-black/30 rounded-full text-white backdrop-blur-md hover:bg-black/50 transition-colors">
-                      <ChevronLeft size={24} />
-                    </button>
-                    <button onClick={nextSlide} className="p-2 bg-black/30 rounded-full text-white backdrop-blur-md hover:bg-black/50 transition-colors">
-                      <ChevronRight size={24} />
-                    </button>
-                  </div>
-                  <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-1.5">
-                    {screenshots.map((_, idx) => (
-                      <div 
-                        key={idx} 
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentSlide ? 'bg-primary w-5' : 'bg-white/60'}`}
-                      />
-                    ))}
-                  </div>
+        {/* Google Reviews - Right */}
+        <div className="absolute top-1/4 right-10 w-80 space-y-6 rotate-[4deg]">
+          <div className="glass-card p-5 rounded-3xl border-primary/20 animate-float" style={{ animationDelay: '0.5s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">G</div>
+              <div>
+                <div className="text-[10px] text-white/60">Google Review</div>
+                <div className="flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3 h-3 fill-primary text-primary" />)}
                 </div>
               </div>
             </div>
+            <p className="text-[11px] text-white/80 text-right leading-relaxed">"האפליקציה הכי טובה לניהול העסק שלי. הכל אוטומטי ונוח!"</p>
           </div>
 
-          {/* Thumbs Up Hand */}
-          <div className="absolute -right-16 top-24 animate-bounce">
-            <div className="bg-[#e2b091] p-5 rounded-full shadow-2xl border-4 border-[#2d1b4d]">
-              <ThumbsUp className="w-10 h-10 text-black" />
+          <div className="glass-card p-5 rounded-3xl border-primary/20 animate-float" style={{ animationDelay: '1.2s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 font-bold">G</div>
+              <div>
+                <div className="text-[10px] text-white/60">Google Review</div>
+                <div className="flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-3 h-3 fill-primary text-primary" />)}
+                </div>
+              </div>
             </div>
+            <p className="text-[11px] text-white/80 text-right leading-relaxed">"סוף סוף יומן שסוגר לי תורים גם כשאני ישנה. מומלץ בחום."</p>
           </div>
         </div>
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute top-10 right-10 animate-float" style={{ animationDelay: '1s' }}>
-        <Zap className="w-10 h-10 text-primary drop-shadow-[0_0_15px_rgba(226,176,145,0.6)]" />
-      </div>
-      <div className="absolute bottom-20 right-0 animate-float" style={{ animationDelay: '2s' }}>
-        <ShieldCheck className="w-12 h-12 text-primary" />
+      {/* Central Character Container */}
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="relative group">
+          {/* Glowing Aura */}
+          <div className="absolute inset-0 bg-primary/30 blur-[120px] rounded-full animate-pulse scale-150" />
+          <div className="absolute inset-0 bg-primary/10 blur-[60px] rounded-full animate-ping" />
+          
+          {/* The Image - Smaller and Floating */}
+          <img 
+            src="/hero-character-no-bg.png" 
+            alt="Velogic Character" 
+            className="w-[320px] h-auto relative z-10 animate-float drop-shadow-[0_20px_50px_rgba(226,176,145,0.4)]"
+          />
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mt-16 w-48 h-1 bg-white/5 rounded-full overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent animate-[shimmer_2s_infinite] w-full" />
+          <div className="h-full bg-primary animate-[load_4s_ease-in-out_forwards]" style={{ width: '0%' }} />
+        </div>
+        
+        <p className="mt-6 text-primary/80 text-sm tracking-widest font-bold animate-pulse text-center">
+          אפליקציה ממותגת אישית לעסק שלך
+        </p>
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        .perspective-1000 { perspective: 1000px; }
-        .preserve-3d { transform-style: preserve-3d; }
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(200%); }
+        @keyframes load {
+          0% { width: 0%; }
+          100% { width: 100%; }
         }
-        .animate-scan { animation: scan 3s linear infinite; }
-        
-        @keyframes orbit {
-          0% { transform: rotate(0deg) translateX(160px) rotate(0deg) scale(1); opacity: 0.8; }
-          25% { transform: rotate(90deg) translateX(180px) rotate(-90deg) scale(1.2); opacity: 1; }
-          50% { transform: rotate(180deg) translateX(160px) rotate(-180deg) scale(1); opacity: 0.8; }
-          75% { transform: rotate(270deg) translateX(140px) rotate(-270deg) scale(0.8); opacity: 0.5; }
-          100% { transform: rotate(360deg) translateX(160px) rotate(-360deg) scale(1); opacity: 0.8; }
-        }
-        .animate-orbit {
-          animation: orbit 6s linear infinite;
-          top: 50%;
-          left: 50%;
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
         }
       `}} />
     </div>
   );
 };
 
-export default HeroCharacter;
+export default LoadingScreen;

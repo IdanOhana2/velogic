@@ -2,44 +2,118 @@
 
 import React from 'react';
 
-const BrandSection = () => {
-  return (
-    <div className="w-full max-w-4xl mx-auto mt-16 mb-24 text-center px-6 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">
-      {/* Main Tagline */}
-      <h2 className="text-4xl md:text-6xl font-black tracking-tight text-white mb-8 leading-tight">
-        העסק שלך, <span className="rose-gold-text">המותג שלך</span>, האפליקציה שלך
-      </h2>
-      
-      {/* Description Paragraph */}
-      <p className="text-lg md:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto mb-16 font-light">
-        בעולם של היום, לינק בוואטסאפ זה נחמד, אבל אפליקציה ממותגת בחנות היא הצהרת כוונות. 
-        ב-<span className="text-primary font-bold">Velogic</span> אנחנו מפתחים עבורך אפליקציה אישית עם חוויית משתמש (UI/UX) ברמה הגבוהה ביותר, 
-        שתגרום ללקוחות שלך להתאהב בעסק בכל פעם שהם פותחים את הנייד.
-      </p>
+const FeatureItem = ({ title, description, emoji }: { title: string, description: string, emoji: string }) => (
+  <div className="flex gap-4 items-start py-4 border-b border-white/5 last:border-0 group">
+    <div className="text-3xl animate-float-slow shrink-0 select-none">
+      {emoji}
+    </div>
+    <div className="text-right">
+      <h4 className="text-lg font-bold text-white group-hover:text-primary transition-colors">{title}</h4>
+      <p className="text-white/50 leading-relaxed text-sm">{description}</p>
+    </div>
+  </div>
+);
 
-      {/* 3D Textured Statement Box */}
-      <div className="relative group">
-        <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/10 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-        <div className="relative glass-card p-10 md:p-16 rounded-[2rem] border-primary/20 overflow-hidden">
-          {/* Background Texture Pattern */}
-          <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-          
-          <div className="relative z-10">
-            <h3 className="text-3xl md:text-5xl font-black rose-gold-text leading-tight tracking-tighter">
-              אנחנו לא רק בונים אפליקציות,
-              <br />
-              <span className="text-white">אנחנו בונים אימפריות דיגיטליות.</span>
+const FeaturesSection = () => {
+  const features = [
+    {
+      emoji: "👑",
+      title: "נראות של מותג על",
+      description: "הלקוח מוריד את האפליקציה שלך מהחנות. זה נראה מקצועי יותר ומשאיר את המתחרים מאחור."
+    },
+    {
+      emoji: "✨",
+      title: "פשטות מנצחת",
+      description: "בלי סיבוכים. נכנסים, רואים זמן פנוי, ובלחיצת כפתור התור סגור."
+    },
+    {
+      emoji: "🤖",
+      title: "אוטומציה מלאה",
+      description: "אישורי תורים ותזכורות בוואטסאפ שקורים מעצמם בזמן שאתה מתרכז בעבודה."
+    },
+    {
+      emoji: "📅",
+      title: "ניהול תורים חכם",
+      description: "מערכת חלקה שמונעת כפל תורים ומנהלת לוחות זמנים מורכבים."
+    },
+    {
+      emoji: "🛍️",
+      title: "חנות וירטואלית",
+      description: "מכירת מוצרים נלווים ישירות באפליקציה בצורה קלה ומהירה."
+    },
+    {
+      emoji: "🏢",
+      title: "ניהול רב-סניפי",
+      description: "שליטה בכל הסניפים והעובדים מפאנל ניהול אחד ומתקדם."
+    },
+    {
+      emoji: "💻",
+      title: "פאנל ניהול אישי",
+      description: "שליטה מלאה בנתונים ובסטטיסטיקות של העסק שלך בזמן אמת."
+    },
+    {
+      emoji: "🎨",
+      title: "עיצוב UI/UX מותאם",
+      description: "האפליקציה תיראה ותרגיש בדיוק כמו המותג שלך – הצבעים והלוגו."
+    }
+  ];
+
+  return (
+    <div className="w-full max-w-6xl mx-auto mt-32 mb-32 px-6">
+      <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
+        
+        {/* Right Side: New Mascot */}
+        <div className="relative flex-1 flex justify-center items-center">
+          <div className="absolute w-[300px] h-[300px] bg-primary/20 blur-[100px] rounded-full animate-pulse" />
+          <div className="relative z-10 animate-float-3d-intense">
+            <img 
+              src="/src/assets/velogic-mascot-new.png" 
+              alt="Velogic Mascot" 
+              className="w-[350px] md:w-[550px] drop-shadow-[0_35px_60px_rgba(226,176,145,0.4)]"
+            />
+          </div>
+        </div>
+
+        {/* Left Side: Unified Feature Box */}
+        <div className="flex-1 w-full">
+          <div className="mb-8 text-right">
+            <h3 className="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">
+              אתה בטח שואל <span className="rose-gold-text">למה אנחנו?</span>
             </h3>
-            <div className="mt-8 flex justify-center gap-4">
-              <div className="h-1 w-12 bg-primary/40 rounded-full"></div>
-              <div className="h-1 w-24 bg-primary rounded-full"></div>
-              <div className="h-1 w-12 bg-primary/40 rounded-full"></div>
+            <div className="h-1.5 w-24 bg-primary rounded-full ml-auto" />
+          </div>
+
+          <div className="glass-card p-8 rounded-[2.5rem] border-primary/20 relative overflow-hidden">
+            {/* Subtle background texture */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+            
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-x-8">
+              {features.map((f, i) => (
+                <FeatureItem key={i} {...f} />
+              ))}
             </div>
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-float-slow {
+          animation: float-slow 4s ease-in-out infinite;
+        }
+        @keyframes float-3d-intense {
+          0%, 100% { transform: translateY(0) rotateY(0); }
+          50% { transform: translateY(-20px) rotateY(10deg); }
+        }
+        .animate-float-3d-intense {
+          animation: float-3d-intense 8s ease-in-out infinite;
+        }
+      `}} />
     </div>
   );
 };
 
-export default BrandSection;
+export default FeaturesSection;
